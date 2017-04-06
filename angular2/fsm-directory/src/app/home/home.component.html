@@ -1,0 +1,12 @@
+<p>
+  {{homeTitle}}
+</p>
+<ng-content></ng-content>
+<p>{{ninja.name}}</p>
+<p>{{ninja.belt}}</p>
+
+<button (click) = "fireYellEvent($event)"> Log In</button>
+<input [(ngModel)] = "player.username" />
+<p> {{player.username}} </p>
+
+<button (click) = "fireYellEvent($event)"> Create Account</button>
