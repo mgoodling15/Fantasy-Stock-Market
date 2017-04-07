@@ -1,0 +1,14 @@
+<header>
+  <h1>{{title}}</h1>
+  <nav>
+    <ul>
+      <p>This is a description of our site and game.</p>
+    </ul>
+  </nav>
+</header>
+
+<section id= "main">
+  <app-home [player] = "player" (onYell) = "yell($event)" >Create Account / Log in</app-home>
+  <login-form></login-form>
+  <player-form></player-form>
+</section>
