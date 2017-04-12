@@ -1,0 +1,19 @@
+<p [ngClass] = "classes">
+  here it is: {{player}}
+</p>
+
+<p *ngIf = "true">Only show if test is true</p>
+
+<style>
+  .blue{color: blue;}
+  .red{color: red;}
+  .underline{text-decoration: underline;}
+</style>
+
+<h2>Player Listing</h2>
+<ul id = "player-listing">
+  <li *ngFor = "let player of players">
+    <span [ngStyle] = "{background: red}">{{player.password}}</span>
+    <h3>{{player.username}}</h3>
+  </li>
+</ul>
