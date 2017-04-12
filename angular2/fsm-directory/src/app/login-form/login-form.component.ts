@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-
-import { Player }    from './player';
+import { Player }    from '../player';
 
 @Component({
   selector: 'login-form',
