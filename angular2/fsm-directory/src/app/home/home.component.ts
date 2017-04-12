@@ -1,4 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { LoginFormComponent} from '../login-form/login-form.component';
+import { PlayerFormComponent} from '../player-form/player-form.component';
+import { Player } from '../player';
 
 @Component({
   selector: 'app-home',
@@ -7,18 +11,14 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   homeTitle = "Welcome to the Fantasy Stock Market";
-  player = {
-   username: ""
-  }
-
-  @Input() ninja;
+  @Input() player;
   @Output() onYell = new EventEmitter();
 
   fireYellEvent(e){
     this.onYell.emit(e);
   }
 
-  constructor() { }
+  constructor(private http: Http) {}
 
   ngOnInit() {
   }
