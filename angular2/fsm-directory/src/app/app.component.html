@@ -1,25 +1,18 @@
-import { Component } from '@angular/core';
-import { HomeComponent } from './home/home.component';
-import { Routes, RouterModule } from '@angular/router';
-import { Http, Response } from '@angular/http';
+<header>
+  <h1>{{title}}</h1>
+  <ul>
+    <p>This is a description of our site and game.</p>
+  </ul>
+  <nav>
+    <a routerLink="/" routerLinkActive="active">Home</a>
+    <p></p>
+    <a routerLink="/league-view" routerLinkActive="active">League View</a>
+    <p></p>
+    <a routerLink="/player-view" routerLinkActive="active">Player View</a>
+  </nav>
+</header>
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-})
-export class AppComponent {
-  title = 'Fantasy Stock Market';
-  //player = 'player';
-  player = {
-    username: "Username",
-    password: "Password",
-    email: "Email",
-    bio: "bio"
-  }
-
-  yell(e){
-    alert("i am yelling");
-    console.log(e);
-  }
-}
+<section id= "main">
+  <!-- <app-home [player] = "player" (onYell) = "yell($event)" >Hi</app-home> -->
+  <router-outlet></router-outlet>
+</section>
