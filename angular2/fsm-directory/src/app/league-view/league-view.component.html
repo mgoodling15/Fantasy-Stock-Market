@@ -1,3 +1,16 @@
-<p>
-  league-view works!
-</p>
+<h2>League Name</h2>
+  <p>
+  League Logo
+  </p>
+  <p>
+  Ranked list of Players
+  </p>
+
+  <h2>Player List</h2>
+  <ul id = "player-listing">
+    <li *ngFor = "let player of players">
+      <h3>{{player.username | uppercase}}</h3>
+      {{player.password}}
+
+    </li>
+  </ul>
