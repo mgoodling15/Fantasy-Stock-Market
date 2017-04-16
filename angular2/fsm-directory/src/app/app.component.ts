@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { HomeComponent } from './home/home.component';
+import { Routes, RouterModule } from '@angular/router';
+import { Http, Response } from '@angular/http';
 
 @Component({
   selector: 'app-root',
@@ -11,5 +13,6 @@ export class AppComponent {
   
   yell(e){
     alert("i am yelling");
+    console.log(e);
   }
 }
