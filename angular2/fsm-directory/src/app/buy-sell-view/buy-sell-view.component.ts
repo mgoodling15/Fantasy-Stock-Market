@@ -4,7 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-buy-sell-view',
   templateUrl: './buy-sell-view.component.html',
-  styleUrls: ['./buy-sell-view.component.css']
+  styleUrls: ['./buy-sell-view.component.css'],
+  providers: []
 })
 export class BuySellViewComponent implements OnInit {
 
