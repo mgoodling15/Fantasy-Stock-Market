@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-
 import { Player }    from './player';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'player-form',
@@ -15,7 +15,7 @@ export class PlayerFormComponent {
   onSubmit() {
 
     this.submitted = true;
-    
+
 
   }
 
