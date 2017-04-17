@@ -7,12 +7,10 @@ import { Player }    from '../player';
 })
 export class LoginFormComponent {
 
-  model = new Player(0, "Email", "Username", "Password", "Bio", 100000);
+  model = new Player("Email", "Username", "Password", "Bio");
 
   submitted = false;
 
   onSubmit() { this.submitted = true; }
 
-  // TODO: Remove this when we're done
-  get diagnostic() { return JSON.stringify(this.model); }
 }
