@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http } from '@angular/http';
 import { LoginFormComponent} from '../login-form/login-form.component';
 import { PlayerFormComponent} from '../player-form/player-form.component';
 import { Player } from '../player';
