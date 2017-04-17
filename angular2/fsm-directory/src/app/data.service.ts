@@ -1,38 +1,34 @@
-
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
+import { Player } from './player';
+
 @Injectable()
 export class DataService {
 
   constructor(private http: Http) { }
 
-  getPlayers(): Observable<any> {
-    return this.http.get('/api/players')
-                    .map(this.extractPlayerData)
-                    .catch(this.handleError);
+  fetchPlayers () {
+    return this.http.get('https://fsm-angular.firebaseio.com/.json').subscribe(
+      (data) => console.log(data)
+      //(res) => res.json()
+    );
   }
 
-  private extractPlayerData(res: Response) {
-    let body;
-
-   // check if empty, before call json
-   if (res.text()) {
-       body = res.json();
-   }
-   return body || {};
-  }
-
-  private addPlayer(res: Response) {
-
-  }
-
-  private handleError (error: any) {
-    let errMsg = (error.message) ? error.message :
-      error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-    return Observable.throw(errMsg);
-  }
-
+  // private handleError (error: Response | any) {
+  //     // In a real world app, you might use a remote logging infrastructure
+  //     let errMsg: string;
+  //     if (error instanceof Response) {
+  //       const body = error.json() || '';
+  //       const err = body.error || JSON.stringify(body);
+  //       errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+  //     } else {
+  //       errMsg = error.message ? error.message : error.toString();
+  //     }
+  //     console.error(errMsg);
+  //     return Observable.throw(errMsg);
+  //   }
 }
