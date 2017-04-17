@@ -15,5 +15,20 @@
 </head>
 <body>
   <app-root>Loading...</app-root>
+
+  <script src="https://www.gstatic.com/firebasejs/3.7.8/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyC-WEdZSlY67ZK_k53zfc6cKLa3VdcH9A8",
+      authDomain: "fsm-angular.firebaseapp.com",
+      databaseURL: "https://fsm-angular.firebaseio.com",
+      projectId: "fsm-angular",
+      storageBucket: "fsm-angular.appspot.com",
+      messagingSenderId: "1020034417614"
+    };
+    firebase.initializeApp(config);
+  </script>
+
 </body>
 </html>
