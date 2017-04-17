@@ -1,16 +1,14 @@
-<h2>League Name</h2>
-  <p>
-  League Logo
-  </p>
-  <p>
-  Ranked list of Players
-  </p>
+<h1>League Name</h1>
+  <h2>Player Listing</h2>
 
-  <h2>Player List</h2>
-  <ul id = "player-listing">
-    <li *ngFor = "let player of players">
-      <h3>{{player.username | uppercase}}</h3>
-      {{player.password}}
-
+  <ul id="ninja-listing">
+    <li *ngFor="let player of players">
+      <div class="single-player">
+        <!-- Player Name -->
+        <h3>{{player.name}}</h3>
+        <div (click)="remove($event)" [attr.data-name]="player.name">{{player.username}}</div>
+      </div>
     </li>
   </ul>
+
+  <button (click)="logIt()">Log me</button>
