@@ -2,6 +2,8 @@
     const router = express.Router();
     const Player = require('../models/player');
     const League = require('../models/league');
+   
+
 
     // get and list players from database
     router.get('/players', function(req, res, next){
@@ -33,11 +35,25 @@
         })
     });
 
-    router.get('/leagues', function(req, res, next){
-        League.find({}).then(function(leagues){
-            res.send(leagues);
-        })
+router.get('/leagues', function(req, res, next){
+   League.find({}).then(function(leagues){
+       res.send(leagues);
+   })
+});
+
+router.get('/stock/:key', function(req,res,next){
+       
+    var request = require('request');
+    var key = req.params.key;
+    request({url:'http://dev.markitondemand.com/Api/v2/Quote/json',qs: {symbol : key}},function(error,response,body){
+       if (!error && response.statusCode == 200){
+           var stockObj = JSON.parse(body);
+           res.json({ Name : stockObj.Name, Price : stockObj.LastPrice});    
+        	
+       }
+	    
     });
+});
 
     module.exports = router;
 
