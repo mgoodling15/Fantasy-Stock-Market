@@ -60,7 +60,7 @@
 </div>
 
 <div [hidden]="!submitted">
-  <h2>You submitted the following:</h2>
+  <h2>You created an account:</h2>
   <div class="row">
     <div class="col-xs-3">Email</div>
     <div class="col-xs-9 pull-left">{{ model.email }}</div>
@@ -80,6 +80,6 @@
   </div>
 
   <br>
-  <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+  <button class="btn btn-primary" (click)="submitted=false">Create Account</button>
 </div>
 <div>
