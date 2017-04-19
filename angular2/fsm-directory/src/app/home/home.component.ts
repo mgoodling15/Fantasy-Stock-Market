@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Http } from '@angular/http';
 import { LoginFormComponent} from '../login-form/login-form.component';
 import { PlayerFormComponent} from '../player-form/player-form.component';
-import { Player } from '../player';
+import { LeagueFormComponent } from '../league-form/league-form.component';
 
 @Component({
   selector: 'app-home',
