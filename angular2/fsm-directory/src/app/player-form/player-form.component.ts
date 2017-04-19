@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Player }    from '../player';
 import { DataService } from '../data.service';
+declare var firebase: any;
 
 @Component({
   selector: 'player-form',
@@ -15,8 +16,13 @@ export class PlayerFormComponent implements OnInit {
   submitted = false;
   model = new Player("Email", "Username", "Password", "Bio");
 
+  email: "";
+  username: "";
+  password: "";
+  bio: ""
+
   constructor (private dataService: DataService) {}
-  ngOnInit() {}
+  ngOnInit() { }
   // getPlayers() {
   //   this.dataService.getPlayers()
   //                    .subscribe(
@@ -30,11 +36,10 @@ export class PlayerFormComponent implements OnInit {
   //                      hero  => this.players.push(player),
   //                      error =>  this.errorMessage = <any>error);
   // }
-  onSubmit() {
-
+  fbPostPlayer(email, username, password, bio) {
     this.submitted = true;
-
-
+    var newPlayer = new Player(email, username, password, bio);
+    firebase.database().ref('/players').push({username: {email: email, username: username,
+      password: password, bio: bio}});
   }
-
 }
