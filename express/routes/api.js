@@ -26,8 +26,8 @@ var stockSymbols = ['ABT', 'ABBV', 'ACN', 'ACE', 'ADBE', 'ADT', 'AAP', 'AES', 'A
 
 const express = require('express');
 const router = express.Router();
-const Player = require('../models/player');
-const League = require('../models/league');
+// const Player = require('../models/player');
+// const League = require('../models/league');
 var request = require('request');
 //var limit = require("simple-rate-limiter");
 //var request = limit(require("request")).to(1).per(5000);
@@ -35,79 +35,74 @@ var request = require('request');
 
 
 // get and list players from database
-router.get('/players', function(req, res, next){
-   Player.find({}).then(function(players){
-      res.send(players);
-   })
-});
-
-    // add a new player to database
-router.post('/players', function(req, res, next){
-   Player.create(req.body).then(function(player){
-       res.send(player);
-   }).catch(next);
-});
-
-// update a player in database
-router.put('/players/:id', function(req, res, next){
-   Player.findByIdAndUpdate({_id: req.params.id}, req.body).then(function(player){
-      Player.findOne({_id: req.params.id}).then(function(player){
-         res.send(player);
-     }); 
-   });
-});
-
-// delete a player from database
-router.delete('/players/:id', function(req, res, next){
-  Player.findByIdAndRemove({_id: req.params.id}).then(function(player){
-       res.send(player);
-  })
-});
-
-router.get('/leagues', function(req, res, next){
-   League.find({}).then(function(leagues){
-       res.send(leagues);
-   })
-});
+// router.get('/players', function(req, res, next){
+//    Player.find({}).then(function(players){
+//       res.send(players);
+//    })
+// });
+//
+//     // add a new player to database
+// router.post('/players', function(req, res, next){
+//    Player.create(req.body).then(function(player){
+//        res.send(player);
+//    }).catch(next);
+// });
+//
+// // update a player in database
+// router.put('/players/:id', function(req, res, next){
+//    Player.findByIdAndUpdate({_id: req.params.id}, req.body).then(function(player){
+//       Player.findOne({_id: req.params.id}).then(function(player){
+//          res.send(player);
+//      });
+//    });
+// });
+//
+// // delete a player from database
+// router.delete('/players/:id', function(req, res, next){
+//   Player.findByIdAndRemove({_id: req.params.id}).then(function(player){
+//        res.send(player);
+//   })
+// });
+//
+// router.get('/leagues', function(req, res, next){
+//    League.find({}).then(function(leagues){
+//        res.send(leagues);
+//    })
+// });
 
 router.get('/stock', function(req,res,next){
-   
+
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");   
-    
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
     var stockObj = [];
     var stocks = [];
     numStocks = 4;
     completed_requests = 0;
     for (i = 0; i < numStocks; i++){
-       
+
         request({url:'http://dev.markitondemand.com/Api/v2/Quote/json',qs: {symbol : stockSymbols[i]}},function(error,response,body){
-           
+
            if (!error && response.statusCode == 200){
                stockJSON = JSON.parse(body);
 	       //console.log(1);
 	       stockObj.push({'Name' : stockJSON.Name, 'Price' : stockJSON.LastPrice});
 	       completed_requests++;
 	       //console.log(stockSymbols[i]);
-	       
+
 	       if (completed_requests == numStocks){
                    //console.log(stockObj);
-                   res.json(JSON.stringify(stockObj));   
+                   res.json(JSON.stringify(stockObj));
 	       }
-                
-                
-	   }
-	    else { console.log(body); } 	   
-		
-	});
- 
-	         
-	    
-   
 
-    }	  
-     
+
+	   }
+	    else { console.log(body); }
+
+	});
+
+    }
+
 });
 
 module.exports = router;
-
