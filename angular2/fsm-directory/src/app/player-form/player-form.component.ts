@@ -18,7 +18,7 @@ export class PlayerFormComponent implements OnInit {
   constructor (private dataService: DataService) {}
   ngOnInit() { }
 
-  onSubmit(email){
+  onSubmit(){
     this.submitted = true;
   }
 
