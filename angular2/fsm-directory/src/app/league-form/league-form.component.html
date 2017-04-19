@@ -1,0 +1,37 @@
+
+<!-- <div> {{diagnostic}} </div> -->
+<div id = "add-league"[hidden]="submitted">
+  <div class="container">
+      <h2>Create League</h2>
+      <form (ngSubmit)="onSubmit(model.email);fbPostLeague(model.leaguename)"
+      #leagueForm="ngForm">
+
+      <div class="form-group">
+        <label for="league-name">League Name</label>
+        <input type="text" class="form-control" id="leaguename"
+        required
+        [(ngModel)]="model.leaguename" name="leaguename"
+        #name="ngModel">
+        <div [hidden]="name.valid || name.pristine"
+        class="alert alert-danger">
+        League name is required
+        </div>
+      </div>
+
+    <button type="submit" class="btn btn-success"
+    [disabled]="!leagueForm.form.valid">Submit</button>
+    </form>
+  </div>
+</div>
+
+<div [hidden]="!submitted">
+  <h2>You created a league:</h2>
+  <div class="row">
+    <div class="col-xs-3">League Name:</div>
+    <div class="col-xs-9 pull-left">{{ model.leaguename }}</div>
+  </div>
+
+  <br>
+  <button class="btn btn-primary" (click)="submitted=false">Create League</button>
+</div>
+<div>
