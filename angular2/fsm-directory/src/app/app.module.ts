@@ -13,6 +13,7 @@ import { PlayerViewComponent } from './player-view/player-view.component';
 import { BuySellViewComponent } from './buy-sell-view/buy-sell-view.component';
 import { FilterPipe } from './filter.pipe';
 import { DataService } from './data.service';
+import { LeagueFormComponent } from './league-form/league-form.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { DataService } from './data.service';
     LoginFormComponent,
     PlayerViewComponent,
     BuySellViewComponent,
-    FilterPipe
+    FilterPipe,
+    LeagueFormComponent
   ],
   imports: [
     BrowserModule,
