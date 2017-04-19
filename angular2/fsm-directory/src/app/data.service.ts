@@ -5,6 +5,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 import { Player } from './player';
+import { League } from './league';
 
 @Injectable()
 export class DataService {
