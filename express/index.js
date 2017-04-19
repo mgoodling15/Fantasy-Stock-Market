@@ -6,8 +6,8 @@ const mongoose = require('mongoose');
 const app = express();
 
 // connect to mongodb
-mongoose.connect('mongodb://localhost/fantasystockmarket');
-mongoose.Promise = global.Promise;
+// mongoose.connect('mongodb://localhost/fantasystockmarket');
+// mongoose.Promise = global.Promise;
 
 app.use(bodyParser.json());
 
