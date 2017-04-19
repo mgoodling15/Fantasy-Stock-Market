@@ -3,7 +3,8 @@
 <div id = "add-player"[hidden]="submitted">
   <div class="container">
       <h1>Create Account</h1>
-      <form (ngSubmit)="onSubmit()" #playerForm="ngForm">
+      <form (ngSubmit)="onSubmit();fbPostPlayer(model.email,
+      model.username, model.password, model.bio)" #playerForm="ngForm">
       <div class="form-group">
         <label for="email">Email</label>
         <input type="text" class="form-control" id="email"
@@ -52,14 +53,14 @@
       </div>
     </div>
 
-    <button type="submit" (click)= "fbPostPlayer(email, username, password, bio)"
-    class="btn btn-success" [disabled]="!playerForm.form.valid">Submit</button>
+    <button type="submit" class="btn btn-success"
+    [disabled]="!playerForm.form.valid">Submit</button>
     </form>
   </div>
 </div>
 
 <div [hidden]="!submitted">
-  <h2>You submitted the following:</h2>
+  <h2>You created an account:</h2>
   <div class="row">
     <div class="col-xs-3">Email</div>
     <div class="col-xs-9 pull-left">{{ model.email }}</div>
@@ -79,6 +80,6 @@
   </div>
 
   <br>
-  <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+  <button class="btn btn-primary" (click)="submitted=false">Create Account</button>
 </div>
 <div>
