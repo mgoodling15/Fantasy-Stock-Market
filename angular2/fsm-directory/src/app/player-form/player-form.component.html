@@ -1,11 +1,11 @@
 
 <!-- <div> {{diagnostic}} </div> -->
-<div [hidden]="submitted">
+<div id = "add-player"[hidden]="submitted">
   <div class="container">
       <h1>Create Account</h1>
       <form (ngSubmit)="onSubmit()" #playerForm="ngForm">
       <div class="form-group">
-        <label for="name">Email</label>
+        <label for="email">Email</label>
         <input type="text" class="form-control" id="email"
         required
         [(ngModel)]="model.email" name="email"
@@ -17,7 +17,7 @@
       </div>
 
       <div class="form-group">
-        <label for="name">Username</label>
+        <label for="username">Username</label>
         <input type="text" class="form-control" id="username"
         required
         [(ngModel)]="model.username" name="username"
@@ -29,7 +29,7 @@
       </div>
 
       <div class="form-group">
-        <label for="portfolio">Password</label>
+        <label for="password">Password</label>
         <input type="text" class="form-control" id="password"
         required
         [(ngModel)]="model.password" name="password"
@@ -41,7 +41,7 @@
       </div>
 
     <div class="form-group">
-      <label for="portfolio">Bio</label>
+      <label for="bio">Bio</label>
       <input type="text" class="form-control" id="bio"
       required
       [(ngModel)]="model.bio" name="bio"
@@ -52,7 +52,8 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-success" [disabled]="!playerForm.form.valid">Submit</button>
+    <button type="submit" (click)= "fbPostPlayer(email, username, password, bio)"
+    class="btn btn-success" [disabled]="!playerForm.form.valid">Submit</button>
     </form>
   </div>
 </div>
