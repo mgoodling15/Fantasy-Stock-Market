@@ -1,3 +1,5 @@
+//file that maintains app modules and imports 
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -25,7 +27,7 @@ import { LeagueFormComponent } from './league-form/league-form.component';
     PlayerViewComponent,
     BuySellViewComponent,
     FilterPipe,
-    LeagueFormComponent
+    LeagueFormComponent,
   ],
   imports: [
     BrowserModule,
