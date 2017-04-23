@@ -1,3 +1,5 @@
+// file that contains routes for links
+
 import { Routes, RouterModule } from '@angular/router';
 import { LeagueViewComponent } from "./league-view/league-view.component";
 import { HomeComponent } from "./home/home.component";
