@@ -1,3 +1,5 @@
+//component file for the root component
+
 import { Component } from '@angular/core';
 import { HomeComponent } from './home/home.component';
 import { Routes, RouterModule } from '@angular/router';
