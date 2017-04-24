@@ -1,3 +1,5 @@
+//file for implementation of league view page component 
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../data.service';
@@ -25,7 +27,9 @@ export class LeagueViewComponent implements OnInit {
 
    fbGetData() {
     firebase.database().ref('/players').on('child_added', (snapshot) => {
-      this.players.push(snapshot.val())
+      this.players.push(snapshot.val());
+      //list players in db by id number, not username
     })
+
   }
 }
