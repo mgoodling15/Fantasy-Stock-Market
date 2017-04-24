@@ -1,3 +1,5 @@
+//player class set-up file
+
 export class Player {
   constructor(
     public email: string,
