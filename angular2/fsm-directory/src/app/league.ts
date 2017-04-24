@@ -1,3 +1,5 @@
+//league class set-up file
+
 import { Player } from './player';
 
 export class League {
