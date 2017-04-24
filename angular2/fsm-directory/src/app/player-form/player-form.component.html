@@ -1,10 +1,12 @@
+<!-- html file for player form component -->
 
-<!-- <div> {{diagnostic}} </div> -->
 <div id = "add-player"[hidden]="submitted">
   <div class="container">
       <h2>Create Account</h2>
-      <form (ngSubmit)="onSubmit();fbPostPlayer(model.email,
-      model.username, model.password, model.bio)" #playerForm="ngForm">
+      <form (ngSubmit)="onSubmit();
+      fbCreatePlayer(model.email, model.password);
+      fbPostPlayer(model.email, model.username, model.password, model.bio)"
+      #playerForm="ngForm">
       <div class="form-group">
         <label for="email">Email</label>
         <input type="text" class="form-control" id="email"
