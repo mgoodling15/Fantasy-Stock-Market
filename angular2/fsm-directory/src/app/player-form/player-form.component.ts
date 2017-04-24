@@ -1,3 +1,5 @@
+//file for implementation of player form component 
+
 import { Component, OnInit } from '@angular/core';
 import { Player }    from '../player';
 import { DataService } from '../data.service';
@@ -22,9 +24,20 @@ export class PlayerFormComponent implements OnInit {
     this.submitted = true;
   }
 
-  fbPostPlayer(email, username, password, bio) {
-    firebase.database().ref('players/' + username).set({email: email,
-      pasword: password, bio: bio
+  fbCreatePlayer(email, password){
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  // ...
+    });
+  }
+
+  fbPostPlayer(username, email, password, bio){
+  var user = firebase.auth().currentUser;
+  var uid = user.uid;
+  firebase.database().ref('players/' + uid).set({username: username, email: email,
+    password: password, bio: bio
     });
   }
 }
