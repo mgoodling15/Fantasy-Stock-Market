@@ -1,31 +1,33 @@
+//file for implementation of league form component 
+
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { League }from '../league';
+import { Player } from '../player';
 import { DataService } from '../data.service';
 declare var firebase: any;
 
 @Component({
-  selector: 'app-league-view',
-  templateUrl: './league-view.component.html',
-  styleUrls: ['./league-view.component.css'],
+  selector: 'league-form',
+  templateUrl: './league-form.component.html',
   providers: [DataService]
 })
-export class LeagueViewComponent implements OnInit {
-  league: string;
-  player: string;
 
-  players = []
+export class LeagueFormComponent implements OnInit {
+  errorMessage: string;
+  mode = 'Observable';
+  submitted = false;
+  player = new Player("player@email.com", "usrnme", "pswrd", "bio");
+  model = new League("League Name", [this.player], 12345, 12345);
 
-  constructor(private route: ActivatedRoute, private dataService: DataService) {
-    this.league = route.snapshot.params['league'];
-   }
+  constructor (private dataService: DataService) {}
+  ngOnInit() { }
 
-   ngOnInit() {
-      this.fbGetData();
-   }
+  onSubmit(email){
+    this.submitted = true;
+  }
 
-   fbGetData() {
-    firebase.database().ref('/players').on('child_added', (snapshot) => {
-      this.players.push(snapshot.val())
-    })
+  fbPostLeague(leaguename) {
+    firebase.database().ref('leagues/' + leaguename).set({players: "none"
+    });
   }
 }
