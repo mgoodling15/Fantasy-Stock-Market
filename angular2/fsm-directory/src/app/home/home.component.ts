@@ -1,8 +1,11 @@
+//file for implementation of home page component 
+
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Http } from '@angular/http';
 import { LoginFormComponent} from '../login-form/login-form.component';
 import { PlayerFormComponent} from '../player-form/player-form.component';
 import { LeagueFormComponent } from '../league-form/league-form.component';
+declare var firebase: any;
 
 @Component({
   selector: 'app-home',
@@ -22,5 +25,13 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
   }
+
+fbSignOut(){
+  firebase.auth().signOut().then(function() {
+    console.log("success");
+  }).catch(function(error) {
+  // An error happened.
+  });
+}
 
 }
