@@ -1,3 +1,5 @@
+//implementation of pipe filter for list of stocks 
+
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
