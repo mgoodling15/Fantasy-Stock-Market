@@ -1,5 +1,5 @@
-<login-form></login-form>
-<player-form></player-form>
-<league-form></league-form>
-<!--<button (click) = "fireYellEvent($event)">Hit me</button>-->
+<!--html file for buy-sell view component-->
+
+<button (click) = "fbSignOut();onSignOut()">Sign Out</button>
+<login-form *ngIf = "!isSignedIn"></login-form>
 <ng-content></ng-content>
