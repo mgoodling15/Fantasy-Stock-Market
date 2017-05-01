@@ -1,0 +1,45 @@
+<!--html file that sets up the firebase and browser-->
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Fantasy Stock Market</title>
+  <link href = "https://font.googleapis.com/css?family=Raleway" rel="stylesheet">
+  <base href="/">
+  <link rel="stylesheet"
+      href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="forms.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" type="text/css" href="styles.css">﻿
+</head>
+<body>
+  <app-root>Loading...</app-root>
+
+  <script src = "https://unpkg.com/babel-standalone@6/babel/min.js"></script>
+  <script src = "https://unpkg.com/react@15/dist/react.js"></script>
+  <script src = "https://unpkg.com/react-dom@15/dist/react-doom.min.js"></scipt>
+  
+  <script src="https://www.gstatic.com/firebasejs/3.7.8/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-messaging.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyC-WEdZSlY67ZK_k53zfc6cKLa3VdcH9A8",
+      authDomain: "fsm-angular.firebaseapp.com",
+      databaseURL: "https://fsm-angular.firebaseio.com",
+      projectId: "fsm-angular",
+      storageBucket: "fsm-angular.appspot.com",
+      messagingSenderId: "1020034417614"
+    };
+    firebase.initializeApp(config);
+  </script>
+
+</body>
+</html>
