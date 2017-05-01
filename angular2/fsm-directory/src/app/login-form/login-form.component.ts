@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
 import { Player }    from '../player';
 import { DataService } from '../data.service';
 declare var firebase: any;
-import { PlayerFormComponent } from '../player-form/player-form.component';
 
 @Component({
   selector: 'login-form',
