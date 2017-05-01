@@ -1,4 +1,4 @@
-//file that maintains app modules and imports 
+//file that maintains app modules and imports
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -9,7 +9,6 @@ import { Routing } from './app.routes';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LeagueViewComponent } from './league-view/league-view.component';
-import { PlayerFormComponent } from './player-form/player-form.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { PlayerViewComponent } from './player-view/player-view.component';
 import { BuySellViewComponent } from './buy-sell-view/buy-sell-view.component';
@@ -22,7 +21,6 @@ import { LeagueFormComponent } from './league-form/league-form.component';
     AppComponent,
     HomeComponent,
     LeagueViewComponent,
-    PlayerFormComponent,
     LoginFormComponent,
     PlayerViewComponent,
     BuySellViewComponent,
