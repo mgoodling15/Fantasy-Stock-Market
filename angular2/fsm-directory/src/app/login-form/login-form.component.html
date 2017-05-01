@@ -1,49 +1,135 @@
-<!-- html file for login form component -->
+<!-- html file for login and create player form component -->
+<!--LOGIN FORM-->
 
-<div [hidden]="submitted">
-  <div class="container">
-    <h2>Log In</h2>
-    <form (ngSubmit)="onSubmit();
-    fbSignIn(model.email, model.password)" #loginForm="ngForm">
+<div [hidden]="isSignedIn">
+  <div [hidden]="submitted">
+    <div class="container">
+      <h2>Log In</h2>
+      <form (ngSubmit)="onSubmit();
+      fbSignIn(model.email, model.password)" #loginForm="ngForm">
+        <div class="form-group">
+          <label for="name">Email</label>
+          <input type="text" class="form-control" id="email"
+          required
+          [(ngModel)]="model.email" name="email"
+          #name="ngModel">
+          <div [hidden]="name.valid || name.pristine"
+          class="alert alert-danger">
+          Email is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Password</label>
+          <input type="text" class="form-control" id="password"
+          required
+          [(ngModel)]="model.password" name="password"
+          #name="ngModel">
+          <div [hidden]="name.valid || name.pristine"
+          class="alert alert-danger">
+          Password is required
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <div [hidden]="!submitted">
+    <h2>You submitted the following:</h2>
+    <div class="row">
+      <div class="col-xs-3">Email</div>
+      <div class="col-xs-9  pull-left">{{ model.email }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Password</div>
+      <div class="col-xs-9 pull-left">{{ model.password }}</div>
+    </div>
+    <br>
+    <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+  </div>
+
+<!--CREATE PLAYER FORM-->
+  <div id = "add-player"[hidden]="submitted1">
+    <div class="container">
+        <h2>Create Account</h2>
+        <form (ngSubmit)="onSubmit1();
+        fbPostPlayer(model1.email, model1.username, model1.password, model1.bio)"
+        #playerForm="ngForm">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" id="email"
+          required
+          [(ngModel)]="model1.email" name="email"
+          #name="ngModel">
+          <div [hidden]="name.valid || name.pristine"
+          class="alert alert-danger">
+          Email is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username"
+          required
+          [(ngModel)]="model1.username" name="username"
+          #name="ngModel">
+          <div [hidden]="name.valid || name.pristine"
+          class="alert alert-danger">
+          Username is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="text" class="form-control" id="password"
+          required
+          [(ngModel)]="model1.password" name="password"
+          #name="ngModel">
+          <div [hidden]="name.valid || name.pristine"
+          class="alert alert-danger">
+          Password is required
+          </div>
+        </div>
+
       <div class="form-group">
-        <label for="name">Email</label>
-        <input type="text" class="form-control" id="email"
+        <label for="bio">Bio</label>
+        <input type="text" class="form-control" id="bio"
         required
-        [(ngModel)]="model.email" name="email"
+        [(ngModel)]="model1.bio" name="bio"
         #name="ngModel">
         <div [hidden]="name.valid || name.pristine"
         class="alert alert-danger">
-        Email is required
+        Bio is required
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="name">Password</label>
-        <input type="text" class="form-control" id="password"
-        required
-        [(ngModel)]="model.password" name="password"
-        #name="ngModel">
-        <div [hidden]="name.valid || name.pristine"
-        class="alert alert-danger">
-        Password is required
-        </div>
-      </div>
-      <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid">Submit</button>
-    </form>
+      <button type="submit" class="btn btn-success"
+      [disabled]="!playerForm.form.valid">Submit</button>
+      </form>
+    </div>
   </div>
-</div>
 
-<div [hidden]="!submitted">
-  <h2>You submitted the following:</h2>
-  <div class="row">
-    <div class="col-xs-3">Email</div>
-    <div class="col-xs-9  pull-left">{{ model.email }}</div>
+  <div [hidden]="!submitted1">
+    <h2>You created an account:</h2>
+    <div class="row">
+      <div class="col-xs-3">Email</div>
+      <div class="col-xs-9 pull-left">{{ model1.email }}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-3">Username</div>
+      <div class="col-xs-9  pull-left">{{ model1.username }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Password</div>
+      <div class="col-xs-9 pull-left">{{ model1.password }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Bio</div>
+      <div class="col-xs-9 pull-left">{{ model1.bio }}</div>
+    </div>
+
+    <br>
+    <button class="btn btn-primary" (click)="submitted=false">Create Account</button>
   </div>
-  <div class="row">
-    <div class="col-xs-3">Password</div>
-    <div class="col-xs-9 pull-left">{{ model.password }}</div>
-  </div>
-  <br>
-  <button class="btn btn-primary" (click)="submitted=false">Edit</button>
-</div>
-<div>
