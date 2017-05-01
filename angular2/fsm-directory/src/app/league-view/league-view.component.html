@@ -1,13 +1,32 @@
 <!-- html file for league view page component -->
+<league-form></league-form>
 
-<h1>League Name</h1>
+
+<div class="container">
+  <h2>Join League</h2>
+  <div class="form-group">
+    <label for="leaguename">League Name</label>
+    <input type="text" class="form-control" id="leaguename"
+    required
+    [(ngModel)]="model.leaguename" name="leaguename"
+    #name="ngModel">
+    <div [hidden]="name.valid || name.pristine"
+    class="alert alert-danger">
+    League Name is required
+    </div>
+  </div>
+  <button class="btn btn-success"
+  (click) = 'joinLeague(model.leaguename)'>Join League</button>
+</div>
+
+<div class="container">
   <h2>Player Listing</h2>
-
-  <ul id="player-listing">
-    <li *ngFor="let player of players">
-      <div class="single-player">
-        <!-- Player Name -->
-        <h3>{{player.username}}</h3>
-      </div>
-    </li>
-  </ul>
+    <ul id="player-listing">
+      <li *ngFor="let player of players">
+        <div class="single-player">
+          <!-- Player Name -->
+          <h3>{{player.username}}</h3>
+        </div>
+      </li>
+    </ul>
+</div>
