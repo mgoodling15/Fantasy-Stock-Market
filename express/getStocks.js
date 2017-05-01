@@ -25,7 +25,10 @@ var stockSymbols = ['ABT', 'ABBV', 'ACN', 'ACE', 'ADBE', 'ADT', 'AAP', 'AES', 'A
 var limit = require("simple-rate-limiter");
 var request = limit(require("request")).to(1).per(10000);
 var fs = require('fs');
-//var request = require("request");
+var schedule = require('node-schedule');
+
+//runs script everynight at Midnight
+schedule.scheduleJob('0 0 * * *',function(){
     var stockObj = [];
     var stocks = [];
     //numStocks = stockSymbols.length;
@@ -63,9 +66,7 @@ var fs = require('fs');
 		
 	});
  
-	         
 	    
-   
-
-    }	  
+    }
+});
   
