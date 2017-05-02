@@ -1,5 +1,5 @@
 //file for implementation of player view component
-
+import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../data.service';
@@ -10,38 +10,43 @@ declare var firebase: any;
   selector: 'app-player-view',
   templateUrl: './player-view.component.html',
   styleUrls: ['./player-view.component.css'],
-  providers: [DataService]
+  providers: [DataService],
+  //template: '<li *ngFor ="#item of items">{{item.val}}</li>'
 })
 
 export class PlayerViewComponent implements OnInit {
   //classes = {'blue': false, 'red': true, 'underline': false};
   player: string;
-  username1: any;
+  items =[]
+  
 
   constructor(private route: ActivatedRoute, private dataService: DataService) {
     this.player = route.snapshot.params['player'];
+   
    }
 
    getInfo(userId){
-     return firebase.database().ref('/players/' + userId).once('value').then(function(snapshot) {
-       var username = snapshot.val().username;
-       var email = snapshot.val().email;
-       var bio = snapshot.val().bio;
-       console.log(username);
-       console.log(email);
-       console.log(bio);
-     }).catch(function(err){
-       console.log("Error", err.code);
-     }
-   );
+    
+     var ref = firebase.database().ref('/players/' + userId);
+     ref.on("value", (snapShot) =>  {
+        this.items.push({"val":snapShot.val().username});
+	this.items.push({"val": snapShot.val().bio});
+        //console.log(snapshot.val().username);
+     });
+
+
+    
+   
    }
 
   ngOnInit() {
     var userId = firebase.auth().currentUser.uid;
     if (userId != null){
         this.getInfo(userId);
+        
     }else{
       console.log("not logged in");
-    }
+    } 
+  
   }
 }
