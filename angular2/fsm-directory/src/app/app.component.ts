@@ -1,9 +1,11 @@
 //component file for the root component
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HomeComponent } from './home/home.component';
 import { Routes, RouterModule } from '@angular/router';
 import { Http } from '@angular/http';
+import { DataService } from './data.service';
+declare var firebase: any;
 
 @Component({
   selector: 'app-root',
@@ -12,9 +14,18 @@ import { Http } from '@angular/http';
 })
 export class AppComponent {
   title = 'Fantasy Stock Market';
+  isSignedIn = false;
 
-  yell(e){
-    alert("i am yelling");
-    console.log(e);
+constructor (private dataService: DataService) {}
+
+ngOnInit(){
+  firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    this.isSignedIn = true;
+    console.log(this.isSignedIn);
   }
+});
+
+}
+
 }
