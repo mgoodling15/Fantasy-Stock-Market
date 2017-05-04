@@ -1,6 +1,6 @@
 //file for implementation of home page component
 
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
 import { LoginFormComponent} from '../login-form/login-form.component';
 import { LeagueFormComponent } from '../league-form/league-form.component';
@@ -13,23 +13,32 @@ declare var firebase: any;
 })
 export class HomeComponent implements OnInit {
   homeTitle = "Welcome to the Fantasy Stock Market";
-  @Input() player;
-  @Output() onYell = new EventEmitter();
   isSignedIn = false;
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) {
+  }
 
   ngOnInit() {
-    var user = firebase.auth().currentUser;
-    if (user == null){
-      this.isSignedIn = false;
-    }else{
+    firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
       this.isSignedIn = true;
+      console.log("signed in");
     }
+    });
+  }
+
+  ngOnChanges(){
+    firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      this.isSignedIn = true;
+      console.log("changed signed in");
+    }
+    });
   }
 
   onSignOut(){
     this.isSignedIn = false;
+    console.log("signed out");
   }
 
   fbSignOut(){
