@@ -1,5 +1,5 @@
 <!--html file for buy-sell view component-->
 
 <button (click) = "fbSignOut();onSignOut()">Sign Out</button>
-<login-form *ngIf = "!isSignedIn"></login-form>
+<login-form [hidden]="isSignedIn"></login-form>
 <ng-content></ng-content>
