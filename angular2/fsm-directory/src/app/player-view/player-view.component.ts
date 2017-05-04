@@ -17,36 +17,37 @@ declare var firebase: any;
 export class PlayerViewComponent implements OnInit {
   //classes = {'blue': false, 'red': true, 'underline': false};
   player: string;
-  items =[]
-  
+  items =[];
+  username = "";
+  email = "";
+  bio = "";
+  portfolio = 0;
+
 
   constructor(private route: ActivatedRoute, private dataService: DataService) {
     this.player = route.snapshot.params['player'];
-   
+
    }
 
    getInfo(userId){
-    
+
      var ref = firebase.database().ref('/players/' + userId);
      ref.on("value", (snapShot) =>  {
-        this.items.push({"val":snapShot.val().username});
-	this.items.push({"val": snapShot.val().bio});
-        //console.log(snapshot.val().username);
+       this.username = snapShot.val().username;
+       this.email = snapShot.val().email;
+       this.bio = snapShot.val().bio;
+       this.portfolio = snapShot.val().portfolio;
      });
-
-
-    
-   
    }
 
   ngOnInit() {
     var userId = firebase.auth().currentUser.uid;
     if (userId != null){
         this.getInfo(userId);
-        
+
     }else{
       console.log("not logged in");
-    } 
-  
+    }
+
   }
 }
