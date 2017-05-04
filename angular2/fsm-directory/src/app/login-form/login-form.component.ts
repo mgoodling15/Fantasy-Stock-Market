@@ -24,11 +24,12 @@ export class LoginFormComponent {
   ngOnInit() { }
 
   onSubmit() {
-    this.submitted = true;
-    var user = firebase.auth().currentUser;
-    if (user != null){
+    firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
       this.isSignedIn = true;
+      console.log(this.isSignedIn);
     }
+  });
   }
 
   onSubmit1() {
@@ -70,7 +71,7 @@ export class LoginFormComponent {
       var user = firebase.auth().currentUser;
       var uid = user.uid;
       firebase.database().ref('players/' + uid).set({username: username, email: email,
-        password: password, bio: bio
+        password: password, bio: bio, portfolio: 100000
       });
     });
   }
