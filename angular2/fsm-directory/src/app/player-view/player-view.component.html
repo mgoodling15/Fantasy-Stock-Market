@@ -1,14 +1,7 @@
 <!-- html file for player view component -->
 
-<h1>{{ username$ }}</h1>
 
-<p>Email</p>
-<p>Bio</p>
-
-<ul id="user-info">
-  <li *ngFor="let item of items | filter:term">
-    <div class="single-stock">
-      <h2>{{item.val}}</h2>
-    </div>
-  </li>
-</ul>
+<h1>Username: {{ username }}</h1>
+<h2>Email: {{ email }}</h2>
+<h2>Bio: {{ bio }}</h2>
+<h2>Portfolio: {{ portfolio }}</h2>
