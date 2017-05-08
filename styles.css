@@ -1,11 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: title;
+  src: url(BEBAS___.ttf);
+}
+
 body{
-    font-family: Raleway;
+    font-family: title;
     color: #555;
     background: #C2C9CA;
     margin: 10px 30px;
 }
 #homepage{
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 10px 20px;
+    background: #fdfdfd;
+    border-radius: 4px;
+    box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
+}
+#buysell{
     max-width: 800px;
     margin: 60px auto;
     padding: 10px 20px;
@@ -31,6 +44,16 @@ label{
 }
 #homepage h1{
     text-align: center;
+}
+
+title {
+    font-family: title;
+    text-align: center;
+    color #900B13;
+}
+
+h1 {
+  text-align: center;
 }
 form{
     max-width: 350px;
