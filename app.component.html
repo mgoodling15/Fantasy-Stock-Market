@@ -1,13 +1,10 @@
 <!--html file for the root component-->
 
 <header>
-  <h1 class = "title">Fantasy Stock Market</h1>
-</header>
-<div id ="homepage">
+  <h1>{{title}}</h1>
   <ul>
-    <p>This game allows you and your friends to form a fantasy stock market game.</p>
+    <p>This is a description of our site and game.</p>
   </ul>
-
   <nav>
     <a routerLink="/" routerLinkActive="active">Home</a>
     <p></p>
@@ -17,8 +14,7 @@
     <p></p>
     <a routerLink="/buy-sell-view" routerLinkActive="active">Buy Sell View</a>
   </nav>
-</div>
-  
+</header>
 
 <section id= "main">
   <!-- <app-home [player] = "player" (onYell) = "yell($event)" >Hi</app-home> -->
