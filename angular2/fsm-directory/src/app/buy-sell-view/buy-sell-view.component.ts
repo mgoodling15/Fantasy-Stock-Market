@@ -35,7 +35,8 @@ export class BuySellViewComponent implements OnInit {
     this.http.get('http://localhost:4000/api/stock')
       .map((res:Response) => res.json())
       .subscribe(
-        data => { this.fillStocks(JSON.parse(data));},
+        
+        data => {console.log(JSON.parse(data)[0]) ;  this.fillStocks(JSON.parse(data));},
         err => console.error(err),
         () => console.log('done')
       );
@@ -43,8 +44,10 @@ export class BuySellViewComponent implements OnInit {
      
   }
   fillStocks(data){
+    
    //fills stock objects with stock data by parsing through json
-   for (var i = 0; i < 4; i++){
+   for (var i = 0; i < data.length; i++){
+       console.log(data[i].Name);
        this.stocks.push({"name": data[i].Name, "value": data[i].Price}); 
    }
   }
