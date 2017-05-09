@@ -19,12 +19,12 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      this.isSignedIn = true;
-      console.log("signed in");
-    }
-    });
+    var user = firebase.auth().currentUser;
+    firebase.database().ref().on('value',snapshot => {
+      if (user != null){
+        this.isSignedIn = true;
+      }
+   })
   }
 
   ngOnChanges(){
@@ -37,7 +37,6 @@ export class HomeComponent implements OnInit {
   }
 
   onSignOut(){
-    this.isSignedIn = false;
     console.log("signed out");
   }
 
