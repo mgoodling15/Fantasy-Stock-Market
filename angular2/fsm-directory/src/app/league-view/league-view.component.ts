@@ -19,6 +19,8 @@ export class LeagueViewComponent implements OnInit {
   model = new League("League Name",[null],12345,12345);
   leaguename = null;
   isInLeague = false;
+  startDate: Date;
+  endDate: Date;
 
   players = []
 
@@ -35,10 +37,20 @@ export class LeagueViewComponent implements OnInit {
       this.leaguename = snapshot.child('league').val();
       if (this.leaguename != null){
         this.fbGetData(this.leaguename);
+        this.fbGetDate(this.leaguename);
         this.isInLeague = true;
       }
    })
   }
+
+  fbGetDate(leaguename) {
+     firebase.database().ref('/leagues/' + leaguename + '/date/').on
+     ('value',snapshot => {
+         //console.log(snapshot.val());
+         this.startDate = snapshot.val();
+    })
+  }
+
 
   fbGetData(leaguename) {
      firebase.database().ref('/leagues/' + leaguename + '/players/').on
@@ -51,7 +63,7 @@ export class LeagueViewComponent implements OnInit {
           return 0;
         }
 
-        this.players.push({username :snapshot.val().username, 
+        this.players.push({username :snapshot.val().username,
           portfolio: snapshot.val().portfolio});
           this.players.sort(compare);
        })
@@ -68,7 +80,7 @@ export class LeagueViewComponent implements OnInit {
 
     firebase.database().ref('players/' + uid).once('value', snapshot => {
       username = snapshot.child('username').val();
-      portfolio = snapshot.child('portfolio').val();
+      portfolio = snapshot.child('cash').val();
     });
 
     //find count or set to zero if doesnt exist
@@ -115,5 +127,7 @@ export class LeagueViewComponent implements OnInit {
     });
   });
   }
+
+
 
 }
