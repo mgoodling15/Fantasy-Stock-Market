@@ -1,4 +1,4 @@
-//file for implementation of league form component 
+//file for implementation of league form component
 
 import { Component, OnInit } from '@angular/core';
 import { League }from '../league';
@@ -16,7 +16,7 @@ export class LeagueFormComponent implements OnInit {
   errorMessage: string;
   mode = 'Observable';
   submitted = false;
-  player = new Player("player@email.com", "usrnme", "pswrd", "bio");
+  player = new Player("player@email.com", "usrnme", "pswrd", "bio", 0);
   model = new League("League Name", [this.player], 12345, 12345);
 
   constructor (private dataService: DataService) {}
