@@ -1,7 +1,6 @@
-<h2>{{name}}</h2>
-<h2>{{value}}</h2>
+<h2 class = "container">Stock Name: {{name}}</h2>
+<h2 class = "container">Value: ${{value}}</h2>
 <form [formGroup] = 'purchase' (ngSubmit) = "buy()">
   <input formControlName = "quantity" type = "quantity">
   <button type= "submit">Buy</button>
 </form>
-
