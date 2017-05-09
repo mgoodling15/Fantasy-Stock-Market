@@ -27,7 +27,8 @@ export class LeagueFormComponent implements OnInit {
   }
 
   fbPostLeague(leaguename) {
-    firebase.database().ref('leagues/' + leaguename).set({players: "none"
+    var date = new Date();
+    firebase.database().ref('leagues/' + leaguename).set({players: "none", date: date.toDateString()
     });
   }
 }
