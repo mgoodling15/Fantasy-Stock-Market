@@ -73,7 +73,7 @@ export class LoginFormComponent implements OnInit {
       var user = firebase.auth().currentUser;
       var uid = user.uid;
       firebase.database().ref('players/' + uid).set({username: username, email: email,
-        password: password, bio: bio, portfolio: 100000
+        password: password, bio: bio, cash: 100000
       });
     });
   }
