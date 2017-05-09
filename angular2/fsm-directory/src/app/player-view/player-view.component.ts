@@ -21,7 +21,7 @@ export class PlayerViewComponent implements OnInit {
   username = "";
   email = "";
   bio = "";
-  portfolio = 0;
+  cash = 0;
 
 
   constructor(private route: ActivatedRoute, private dataService: DataService) {
@@ -36,7 +36,7 @@ export class PlayerViewComponent implements OnInit {
        this.username = snapShot.val().username;
        this.email = snapShot.val().email;
        this.bio = snapShot.val().bio;
-       this.portfolio = snapShot.val().portfolio;
+       this.cash = snapShot.val().cash;
      });
    }
 
