@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
+declare var firebase: any;
 
 @Component({
   selector: 'app-buy-confirm',
@@ -20,7 +21,20 @@ export class BuyConfirmComponent implements OnInit, OnDestroy {
 
   buy() {
      //console.log(event);
-     console.log(this.purchase.value.quantity);
+     var quan = this.purchase.value.quantity;
+     var user = firebase.auth().currentUser;
+     var uid = user.uid;
+     var currentQuan;
+     var ref = firebase.database().ref('players/' + uid + '/stocks/' +  this.name + '/');
+     ref.on("value", (snapshot) => {
+        currentQuan = snapshot.val();
+     });
+     if (currentQuan == null){
+        currentQuan = 0;
+     }
+     
+     firebase.database().ref('players/' + uid + '/stocks/' +  this.name + '/').set(parseInt(quan) + parseInt(currentQuan));
+     //firebase.database().ref('players/' + uid + '/stock/').set(quan);
   }
 
   constructor(private route : ActivatedRoute, public fb: FormBuilder) { }
