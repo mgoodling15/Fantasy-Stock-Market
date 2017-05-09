@@ -15,14 +15,16 @@ var fs = require('fs');
 var path = require('path');
 
 
-var filePath = path.join(__dirname, 'stockInfoTest');
+var filePath = path.join(__dirname, 'stockInfo');
 
 router.get('/stock', function(req,res,next){
-
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
     //object containing all stock information
     fs.readFile(filePath,'utf8',function(err,data){
 	if (err) throw err;
-	res.json(JSON.stringify(data));
+	res.json(data);
+       
+	
     });
     
 
