@@ -16,25 +16,29 @@ declare var firebase: any;
 export class LeagueViewComponent implements OnInit {
   league: string;
   player: string;
-  model = new League("League Name");
+  model = new League("League Name",[null],12345,12345);
 
   players = []
-
+ 
   constructor(private route: ActivatedRoute, private dataService: DataService) {
     this.league = route.snapshot.params['league'];
    }
 
    ngOnInit() {
-      //this.fbGetData();
+      this.fbGetData();
    }
 
-  //  fbGetData() {
-  //   firebase.database().ref('/players').on('child_added', (snapshot) => {
-  //     this.players.push(snapshot.val());
-  //     //list players in db by id number, not username
-  //   })
+    fbGetData() {
+     firebase.database().ref('/players').on('value',snapshot => {
+      
+       snapshot.forEach(snapshot2 => {
+         //console.log(snapshot2.val().username);
+         this.players.push({name :snapshot2.val().username});
+        
+     })
 
-  //}
+  })
+  }
 
   joinLeague(leaguename){
     var user = firebase.auth().currentUser;
