@@ -15,6 +15,7 @@ import { BuySellViewComponent } from './buy-sell-view/buy-sell-view.component';
 import { FilterPipe } from './filter.pipe';
 import { DataService } from './data.service';
 import { LeagueFormComponent } from './league-form/league-form.component';
+import { BuyConfirmComponent } from './buy-confirm/buy-confirm.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { LeagueFormComponent } from './league-form/league-form.component';
     BuySellViewComponent,
     FilterPipe,
     LeagueFormComponent,
+    BuyConfirmComponent,
   ],
   imports: [
     BrowserModule,
