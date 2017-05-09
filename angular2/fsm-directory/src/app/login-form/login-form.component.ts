@@ -1,53 +1,81 @@
-//file for implementation of player view component
-import { Observable } from 'rxjs/Observable';
+//file for implementation of login form component
+
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Player }    from '../player';
 import { DataService } from '../data.service';
-import { LoginFormComponent } from '../login-form/login-form.component';
 declare var firebase: any;
 
 @Component({
-  selector: 'app-player-view',
-  templateUrl: './player-view.component.html',
-  styleUrls: ['./player-view.component.css'],
-  providers: [DataService],
-  //template: '<li *ngFor ="#item of items">{{item.val}}</li>'
+  selector: 'login-form',
+  templateUrl: './login-form.component.html',
+  providers: [DataService]
 })
+export class LoginFormComponent implements OnInit {
+  errorMessage: string;
+  mode = 'Observable';
+  submitted = false;
+  model = new Player("Email", "Username", "Password", "Bio", 0);
+  loggedIn = false;
+  isSignedIn = false;
+  submitted1 = false;
+  model1 = new Player("Email", "Username", "Password", "Bio", 0);
 
-export class PlayerViewComponent implements OnInit {
-  //classes = {'blue': false, 'red': true, 'underline': false};
-  player: string;
-  items =[];
-  username = "";
-  email = "";
-  bio = "";
-  cash = 0;
-
-
-  constructor(private route: ActivatedRoute, private dataService: DataService) {
-    this.player = route.snapshot.params['player'];
-
-   }
-
-   getInfo(userId){
-
-     var ref = firebase.database().ref('/players/' + userId);
-     ref.on("value", (snapShot) =>  {
-       this.username = snapShot.val().username;
-       this.email = snapShot.val().email;
-       this.bio = snapShot.val().bio;
-       this.cash = snapShot.val().cash;
-     });
-   }
-
+  constructor (private dataService: DataService) {}
   ngOnInit() {
-    var userId = firebase.auth().currentUser.uid;
-    if (userId != null){
-        this.getInfo(userId);
 
-    }else{
-      console.log("not logged in");
+   }
+
+  onSubmit() {
+    firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      this.isSignedIn = true;
+      console.log(this.isSignedIn);
     }
-
+  });
   }
+
+  onSubmit1() {
+    this.submitted1 = true;
+    var user = firebase.auth().currentUser;
+    if (user != null){
+      this.isSignedIn = true;
+    }
+  }
+
+  fbSignIn(email, password){
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+      // Handle Errors here.
+      if(error){
+        alert("Invalid username or passord.");
+        var errorCode = error.code;
+        var errorMessage = error.message;
+      }
+    });
+  }
+
+  fbCreatePlayer(email, username, password, bio){
+    return firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+    if (error) {
+      alert("Invalid info for create account.")
+      console.log('Login Failed!', error);
+    } else {
+      this.isSignedIn = true;
+      console.log('Authenticated successfully');
+    }
+      var errorCode = error.code;
+      var errorMessage = error.message;
+    })
+  }
+
+  fbPostPlayer(email, username, password, bio){
+    this.fbCreatePlayer(email, username, password, bio).then(function(value){
+      firebase.auth().signInWithEmailAndPassword(email, password);
+      var user = firebase.auth().currentUser;
+      var uid = user.uid;
+      firebase.database().ref('players/' + uid).set({username: username, email: email,
+        password: password, bio: bio, cash: 100000
+      });
+    });
+  }
+
 }
