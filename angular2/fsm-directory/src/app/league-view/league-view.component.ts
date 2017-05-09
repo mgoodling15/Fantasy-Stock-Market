@@ -17,35 +17,62 @@ export class LeagueViewComponent implements OnInit {
   league: string;
   player: string;
   model = new League("League Name",[null],12345,12345);
+  leaguename = null;
+  isInLeague = false;
 
   players = []
- 
+
+
+
   constructor(private route: ActivatedRoute, private dataService: DataService) {
     this.league = route.snapshot.params['league'];
    }
 
-   ngOnInit() {
-      this.fbGetData();
-   }
+  ngOnInit() {
+    var user = firebase.auth().currentUser;
+    var uid = user.uid;
+    firebase.database().ref('/players/' + uid).on('value',snapshot => {
+      this.leaguename = snapshot.child('league').val();
+      if (this.leaguename != null){
+        this.fbGetData(this.leaguename);
+        this.isInLeague = true;
+      }
+   })
+  }
 
-    fbGetData() {
-     firebase.database().ref('/players').on('value',snapshot => {
-      
-       snapshot.forEach(snapshot2 => {
-         //console.log(snapshot2.val().username);
-         this.players.push({name :snapshot2.val().username});
-        
-     })
+  fbGetData(leaguename) {
+     firebase.database().ref('/leagues/' + leaguename + '/players/').on
+     ('value',snapshot => {
+       snapshot.forEach(snapshot => {
+         console.log(snapshot.val());
+         function compare(a,b) {
+           if (a.portfolio < b.portfolio){return -1}
+           if (a.portfolio > b.portfolio){return 1}
+          return 0;
+        }
 
-  })
+        this.players.push({username :snapshot.val().username, 
+          portfolio: snapshot.val().portfolio});
+          this.players.sort(compare);
+       })
+    })
   }
 
   joinLeague(leaguename){
     var user = firebase.auth().currentUser;
     var uid = user.uid;
 
+    var email = "";
+    var username = "";
+    var portfolio = 0;
+
+    firebase.database().ref('players/' + uid).once('value', snapshot => {
+      username = snapshot.child('username').val();
+      portfolio = snapshot.child('portfolio').val();
+    });
+
     //find count or set to zero if doesnt exist
-    firebase.database().ref('leagues/' + leaguename).once('value', function(snapshot) {
+    firebase.database().ref('leagues/' + leaguename).once('value', snapshot => {
       var count = snapshot.child('count').val();
       if (count == null){
         count = 0;
@@ -55,7 +82,8 @@ export class LeagueViewComponent implements OnInit {
 
       //check if player exists in league
       var exists = false;
-      firebase.database().ref('leagues/' + leaguename + '/players/').once('value', function(snapshot){
+      firebase.database().ref('leagues/' + leaguename + '/players/').once
+      ('value', snapshot => {
         snapshot.forEach(function(child){
           if (child.val() == uid){
             exists = true;
@@ -72,7 +100,8 @@ export class LeagueViewComponent implements OnInit {
           firebase.database().ref('leagues/' + leaguename + '/count/').set(count
           ).then(
           firebase.database().ref('leagues/' + leaguename).once('value', function(snapshot){
-              firebase.database().ref('leagues/' + leaguename + '/players/' + count).set(uid
+              firebase.database().ref('leagues/' + leaguename + '/players/' + count).set({uid: uid,
+                username: username, portfolio: portfolio}
                 );
             }).then(
               firebase.database().ref('players/' + uid + '/league/').set(leaguename)
