@@ -7,7 +7,7 @@ Added comments, added ability to read in more than one stock
 Makes get request to server to get stock information and puts it in object
 */
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Http, Response } from '@angular/http';
 
 
@@ -20,7 +20,7 @@ import { Http, Response } from '@angular/http';
 export class BuySellViewComponent implements OnInit {
  public stockLst;
  
- constructor(private http: Http) {}
+ constructor(private http: Http, private router : Router) {}
   //list of stocks to display
   stocks = [];
   //on component initialization calls this function
@@ -36,7 +36,7 @@ export class BuySellViewComponent implements OnInit {
       .map((res:Response) => res.json())
       .subscribe(
         
-        data => {console.log(JSON.parse(data)[0]) ;  this.fillStocks(JSON.parse(data));},
+        data => {  this.fillStocks(JSON.parse(data));},
         err => console.error(err),
         () => console.log('done')
       );
@@ -47,9 +47,15 @@ export class BuySellViewComponent implements OnInit {
     
    //fills stock objects with stock data by parsing through json
    for (var i = 0; i < data.length; i++){
-       console.log(data[i].Name);
-       this.stocks.push({"name": data[i].Name, "value": data[i].Price}); 
+       if (typeof data[i].Name != 'undefined'){
+           this.stocks.push({"name": data[i].Name, "value": data[i].Price});
+        }
+	else {  }
    }
+  }
+  buy(stockName, stockValue){
+     
+     this.router.navigate(['buy-confirm'],{queryParams: {name : stockName, value : stockValue}});
   }
 
 }

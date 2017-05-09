@@ -8,7 +8,7 @@
 </form>
 <ul id="stock-listing">
   <li *ngFor="let stock of stocks | filter:term">
-    <div class="single-stock">
+    <div (click) = "buy(stock.name, stock.value)" class="single-stock">
       <h2>{{stock.name}}</h2>
       <h2>{{stock.value}}</h2>
     </div>
