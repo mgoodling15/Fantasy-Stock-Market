@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { Routing } from './app.routes';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LeagueViewComponent } from './league-view/league-view.component';
@@ -34,6 +34,7 @@ import { BuyConfirmComponent } from './buy-confirm/buy-confirm.component';
     FormsModule,
     HttpModule,
     JsonpModule,
+    ReactiveFormsModule,
     Routing
   ],
   providers: [DataService],
