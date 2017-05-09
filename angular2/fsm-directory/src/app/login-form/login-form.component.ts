@@ -1,6 +1,6 @@
 //file for implementation of login form component
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Player }    from '../player';
 import { DataService } from '../data.service';
 declare var firebase: any;
@@ -10,18 +10,20 @@ declare var firebase: any;
   templateUrl: './login-form.component.html',
   providers: [DataService]
 })
-export class LoginFormComponent {
+export class LoginFormComponent implements OnInit {
   errorMessage: string;
   mode = 'Observable';
   submitted = false;
-  model = new Player("Email", "Username", "Password", "Bio");
+  model = new Player("Email", "Username", "Password", "Bio", 0);
   loggedIn = false;
   isSignedIn = false;
   submitted1 = false;
-  model1 = new Player("Email", "Username", "Password", "Bio");
+  model1 = new Player("Email", "Username", "Password", "Bio", 0);
 
   constructor (private dataService: DataService) {}
-  ngOnInit() { }
+  ngOnInit() {
+
+   }
 
   onSubmit() {
     firebase.auth().onAuthStateChanged(function(user) {
