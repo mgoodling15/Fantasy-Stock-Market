@@ -1,7 +1,6 @@
-<league-form></league-form>
+<league-form [hidden] = "isInLeague"></league-form>
 
-
-<div class="container">
+<div class="container" [hidden] = "isInLeague">
   <h2>Join League</h2>
   <div class="form-group">
     <label for="leaguename">League Name</label>
@@ -18,13 +17,15 @@
   (click) = 'joinLeague(model.leaguename)'>Join League</button>
 </div>
 
+<h1>League Name: {{ leaguename }}</h1>
+
 <div class="container">
-  <h2>Player Listing</h2>
+  <h2>Players in Your League:</h2>
     <ul id="player-listing">
-      <li *ngFor="let play of players">
+      <li *ngFor="let player of players">
         <div class="single-player">
           <!-- Player Name -->
-          <h3>{{play.name}}</h3>
+          <h3>{{ player.username }}: ${{ player.portfolio }}</h3>
         </div>
       </li>
     </ul>
