@@ -5,6 +5,7 @@ import { LeagueViewComponent } from "./league-view/league-view.component";
 import { HomeComponent } from "./home/home.component";
 import { PlayerViewComponent } from "./player-view/player-view.component";
 import { BuySellViewComponent } from "./buy-sell-view/buy-sell-view.component";
+import { BuyConfirmComponent } from "./buy-confirm/buy-confirm.component";
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'buy-sell-view',
     component: BuySellViewComponent
+  },
+  {
+    path: "buy-confirm",
+    component: BuyConfirmComponent
   }
 ];
 export const Routing = RouterModule.forRoot(routes);
