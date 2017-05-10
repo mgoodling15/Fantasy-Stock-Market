@@ -1,13 +1,11 @@
 <!-- html file for league form component -->
 
 <div id = "add-league"[hidden]="submitted">
-  <div class="container">
       <h2>Create League</h2>
       <form (ngSubmit)="onSubmit(model.email);fbPostLeague(model.leaguename)"
       #leagueForm="ngForm">
 
       <div class="form-group">
-        <label for="league-name">League Name</label>
         <input type="text" class="form-control" id="leaguename"
         required
         [(ngModel)]="model.leaguename" name="leaguename"
@@ -21,7 +19,6 @@
     <button type="submit" class="btn btn-success"
     [disabled]="!leagueForm.form.valid">Submit</button>
     </form>
-  </div>
 </div>
 
 <div [hidden]="!submitted">
