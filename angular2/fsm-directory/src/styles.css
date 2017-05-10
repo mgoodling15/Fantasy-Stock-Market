@@ -1,6 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: title;
+
+}
+
 body{
-    font-family: Raleway;
+    font-family: title;
     color: #555;
     background: #C2C9CA;
     margin: 10px 30px;
@@ -31,6 +36,18 @@ label{
 }
 #homepage h1{
     text-align: center;
+}
+
+title {
+    font-family: title;
+    text-align: center;
+}
+
+h1 {
+  text-align: center;
+}
+h2 {
+  text-align: center;
 }
 form{
     max-width: 350px;
