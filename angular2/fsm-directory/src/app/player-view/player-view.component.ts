@@ -26,7 +26,7 @@ export class PlayerViewComponent implements OnInit {
   cash = 0;
   portfolio = 0;
   stocksOwned = [];
-  stocks = [];
+  //stocks = [];
 
   constructor(private route: ActivatedRoute, private dataService: DataService,
   private http: Http) {
@@ -42,43 +42,48 @@ export class PlayerViewComponent implements OnInit {
        this.cash = snapShot.val().cash;
      });
 
-     this.getStocks();
+     
+     
      this.fillStocksOwned(userId);
    }
 
    fillStocksOwned(userId){
      var ref = firebase.database().ref('/players/' + userId + '/stocks/');
      ref.on("value", (snapShot) =>  {
-       snapShot.forEach(snapShot => {
-         var key = snapShot.getKey();
-         var amount = snapShot.val();
-         this.stocksOwned.push({key: key, amount: amount});
-         console.log(snapShot.getKey());
-         console.log(snapShot.val());
-       })
+       var stocks = snapShot.val();
+       console.log(stocks);
+       for (var key in stocks){
+          console.log(stocks.key);
+          this.stocksOwned.push({name : key, value : stocks[key]});
+       }
+       //snapShot.forEach(snapChild => {
+        // this.stocksOwned.push(snapChild.val());
+        // console.log(snapChild.key());
+      // })
      });
      this.getValues();
    }
 
    getValues(){
-     console.log(this.stocksOwned);
-     console.log(this.stocks);
-     console.log("here");
+     
+    // console.log("here");
 
-     for (var i = 0; i < this.stocksOwned.length; i++){
-       console.log(this.stocksOwned[i].getKey());
-       for (var stock of this.stocks){
-         console.log("hi");
-         console.log(stock.name);
-       }
-      }
+    // for (var i = 0; i < this.stocksOwned.length; i++){
+    //   console.log(this.stocksOwned[i].getKey());
+    //   for (var stock of this.stocks){
+    //     console.log("hi");
+    //     console.log(stock.name);
+    //   }
+    //  }
     }
 
 
   ngOnInit() {
+    //this.getStocks();
     var userId = firebase.auth().currentUser.uid;
     if (userId != null){
         this.getInfo(userId);
+	
 
     }else{
       console.log("not logged in");
@@ -99,11 +104,12 @@ export class PlayerViewComponent implements OnInit {
 
   fillStocks(data){
    //fills stock objects with stock data by parsing through json
-   for (var i = 0; i < data.length; i++){
-       if (typeof data[i].Name != 'undefined'){
-           this.stocks.push({name: data[i].Name, value: data[i].Price});
-        }
-        else {  }
-    }
+   //for (var i = 0; i < data.length; i++){
+   //    if (typeof data[i].Name != 'undefined'){
+   //        this.stocks.push({name: data[i].Name, value: data[i].Price});
+   //    }
+   //     else {  }
+   // }
  }
+
 }

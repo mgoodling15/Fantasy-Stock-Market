@@ -5,3 +5,12 @@
 <h2>Email: {{ email }}</h2>
 <h2>Bio: {{ bio }}</h2>
 <h2>Cash: {{ cash }}</h2>
+<h2>Net Worth: 100,000<h2>
+<ul id="stock-listing">
+  <li *ngFor="let stock of stocksOwned | filter:term">
+    <div class="single-stock">
+      <h2>{{stock.value}} stocks of  {{ stock.name }} </h2>
+      
+    </div>
+  </li>
+</ul>
