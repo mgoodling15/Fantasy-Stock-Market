@@ -3,6 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Player }    from '../player';
 import { DataService } from '../data.service';
+import {Router } from '@angular/router';
 declare var firebase: any;
 
 @Component({
@@ -20,7 +21,7 @@ export class LoginFormComponent implements OnInit {
   submitted1 = false;
   model1 = new Player("Email", "Username", "Password", "Bio", 0);
 
-  constructor (private dataService: DataService) {}
+  constructor (private dataService: DataService, private router : Router) {}
   ngOnInit() {
 
    }
@@ -29,8 +30,10 @@ export class LoginFormComponent implements OnInit {
     firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       this.isSignedIn = true;
+      
       console.log(this.isSignedIn);
     }
+    
   });
   }
 
@@ -39,6 +42,7 @@ export class LoginFormComponent implements OnInit {
     var user = firebase.auth().currentUser;
     if (user != null){
       this.isSignedIn = true;
+      this.router.navigate(['player-view']);
     }
   }
 
@@ -50,7 +54,9 @@ export class LoginFormComponent implements OnInit {
         var errorCode = error.code;
         var errorMessage = error.message;
       }
+     
     });
+      this.router.navigate(['player-view']);
   }
 
   fbCreatePlayer(email, username, password, bio){
@@ -65,6 +71,7 @@ export class LoginFormComponent implements OnInit {
       var errorCode = error.code;
       var errorMessage = error.message;
     })
+    
   }
 
   fbPostPlayer(email, username, password, bio){
@@ -76,6 +83,7 @@ export class LoginFormComponent implements OnInit {
         password: password, bio: bio, cash: 100000
       });
     });
+    this.router.navigate(['player-view']);
   }
 
 }
