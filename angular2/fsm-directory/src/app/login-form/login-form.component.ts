@@ -20,7 +20,7 @@ export class LoginFormComponent implements OnInit {
   isSignedIn = false;
   submitted1 = false;
   model1 = new Player("Email", "Username", "Password", "Bio", 0);
-
+  public state = 'home';
   constructor (private dataService: DataService, private router : Router) {}
   ngOnInit() {
 
@@ -30,8 +30,8 @@ export class LoginFormComponent implements OnInit {
     firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       this.isSignedIn = true;
-      
-      console.log(this.isSignedIn);
+      this.state = 'created';
+      console.log(this.state);
     }
     
   });
@@ -42,7 +42,8 @@ export class LoginFormComponent implements OnInit {
     var user = firebase.auth().currentUser;
     if (user != null){
       this.isSignedIn = true;
-      this.router.navigate(['player-view']);
+      this.state = 'created';
+      //this.router.navigate(['player-view']);
     }
   }
 
@@ -54,7 +55,7 @@ export class LoginFormComponent implements OnInit {
         var errorCode = error.code;
         var errorMessage = error.message;
       }
-     
+     else { this.state = 'logged' }
     });
      // this.router.navigate(['player-view']);
   }
@@ -66,6 +67,7 @@ export class LoginFormComponent implements OnInit {
       console.log('Login Failed!', error);
     } else {
       this.isSignedIn = true;
+      this.state = 'created';
       console.log('Authenticated successfully');
     }
       var errorCode = error.code;
@@ -83,7 +85,7 @@ export class LoginFormComponent implements OnInit {
         password: password, bio: bio, cash: 100000
       });
     });
-    this.router.navigate(['player-view']);
+    //this.router.navigate(['player-view']);
   }
 
 }

@@ -1,8 +1,9 @@
 <!-- html file for login and create player form component -->
 <!--LOGIN FORM-->
 
-
-  <div [hidden]="submitted">
+<h2 *ngIf = "state == 'logged'">You successfully logged in!</h2>
+<h2 *ngIf = "state == 'created'">You successfully created an account!</h2>
+  <div *ngIf = "state == 'home'">
     <div class="container">
       <h2>Log In</h2>
       <form (ngSubmit)="onSubmit();
@@ -49,8 +50,10 @@
     <button class="btn btn-primary" (click)="submitted=false">Edit</button>
   </div>
 
+
+  
 <!--CREATE PLAYER FORM-->
-  <div id = "add-player"[hidden]="submitted1">
+  <div id = "add-player" *ngIf = "state == 'home'">
     <div class="container">
         <h2>Create Account</h2>
         <form (ngSubmit)="onSubmit1();
@@ -109,26 +112,6 @@
       </form>
     </div>
   </div>
-
-  <div [hidden]="!submitted1">
-    <h2>You created an account:</h2>
-    <div class="row">
-      <div class="col-xs-3">Email</div>
-      <div class="col-xs-9 pull-left">{{ model1.email }}</div>
-    </div>
-
-    <div class="row">
-      <div class="col-xs-3">Username</div>
-      <div class="col-xs-9  pull-left">{{ model1.username }}</div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3">Password</div>
-      <div class="col-xs-9 pull-left">{{ model1.password }}</div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3">Bio</div>
-      <div class="col-xs-9 pull-left">{{ model1.bio }}</div>
-    </div>
-
-    <br>
-    <button class="btn btn-primary" (click)="submitted=false">Create Account</button>
+ 
+  
+ 
