@@ -22,12 +22,12 @@
 <h3 class="container">Date of Start: {{ startDate }}</h3>
 
 <div class="container">
-  <h2>Players in Your League:</h2>
+  <h2>Net Worth of Players in Your League:</h2>
     <ul id="player-listing">
       <li *ngFor="let player of players">
         <div class="single-player">
           <!-- Player Name -->
-          <h3>{{ player.username }}: ${{ player.portfolio }}</h3>
+          <h3>{{ player.username }}: 100000</h3>
         </div>
       </li>
     </ul>
