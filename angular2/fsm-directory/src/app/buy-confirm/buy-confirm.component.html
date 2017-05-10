@@ -1,6 +1,11 @@
 <h2 class = "container">Stock Name: {{name}}</h2>
 <h2 class = "container">Value: ${{value}}</h2>
-<form [formGroup] = 'purchase' (ngSubmit) = "buy()">
+<h2 class = "container" *ngIf = "state != 'confirm'">Available Cash: {{cash}}</h2>
+<h2 class = "container" *ngIf = "state == 'confirm'">Available Cash: {{newCash}}</h2>
+<form *ngIf= "state == 'input'" [formGroup] = 'purchase' (ngSubmit) = "buy()">
   <input formControlName = "quantity" type = "quantity">
   <button type= "submit">Buy</button>
 </form>
+<h2 class = "container" *ngIf = "state == 'confirm'">
+You purchased {{quan}} stocks of {{name}} for ${{cost}}</h2>
+<h2 class = "container" *ngIf = "state == 'deny'">Insufficient Funds!!!</h2>
