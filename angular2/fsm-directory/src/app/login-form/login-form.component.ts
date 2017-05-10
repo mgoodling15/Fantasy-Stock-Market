@@ -56,7 +56,7 @@ export class LoginFormComponent implements OnInit {
       }
      
     });
-      this.router.navigate(['player-view']);
+     // this.router.navigate(['player-view']);
   }
 
   fbCreatePlayer(email, username, password, bio){
