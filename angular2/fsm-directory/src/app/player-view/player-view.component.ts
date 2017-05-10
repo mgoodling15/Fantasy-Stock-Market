@@ -42,8 +42,8 @@ export class PlayerViewComponent implements OnInit {
        this.cash = snapShot.val().cash;
      });
 
-     
-     
+
+
      this.fillStocksOwned(userId);
    }
 
@@ -65,7 +65,7 @@ export class PlayerViewComponent implements OnInit {
    }
 
    getValues(){
-     
+
     // console.log("here");
 
     // for (var i = 0; i < this.stocksOwned.length; i++){
@@ -83,7 +83,7 @@ export class PlayerViewComponent implements OnInit {
     var userId = firebase.auth().currentUser.uid;
     if (userId != null){
         this.getInfo(userId);
-	
+
 
     }else{
       console.log("not logged in");
