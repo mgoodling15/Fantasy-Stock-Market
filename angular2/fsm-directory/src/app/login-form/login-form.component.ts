@@ -33,7 +33,7 @@ export class LoginFormComponent implements OnInit {
       this.state = 'created';
       console.log(this.state);
     }
-    
+
   });
   }
 
@@ -73,7 +73,7 @@ export class LoginFormComponent implements OnInit {
       var errorCode = error.code;
       var errorMessage = error.message;
     })
-    
+
   }
 
   fbPostPlayer(email, username, password, bio){
