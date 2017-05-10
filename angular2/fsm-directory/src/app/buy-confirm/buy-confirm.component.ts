@@ -32,7 +32,7 @@ export class BuyConfirmComponent implements OnInit, OnDestroy {
      if (currentQuan == null){
         currentQuan = 0;
      }
-     
+
      firebase.database().ref('players/' + uid + '/stocks/' +  this.name + '/').set(parseInt(quan) + parseInt(currentQuan));
      //firebase.database().ref('players/' + uid + '/stock/').set(quan);
   }
@@ -40,8 +40,10 @@ export class BuyConfirmComponent implements OnInit, OnDestroy {
   constructor(private route : ActivatedRoute, public fb: FormBuilder) { }
 
   ngOnInit() {
+    var user = firebase.auth().currentUser;
+    var uid = user.uid;
      this.sub = this.route.queryParams.subscribe(params => {
-            
+
             this.name = params['name'];
             this.value = +params['value'];
      });
