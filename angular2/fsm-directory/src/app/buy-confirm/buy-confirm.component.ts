@@ -42,10 +42,9 @@ export class BuyConfirmComponent implements OnInit, OnDestroy {
      if (Number(this.cost) < Number(this.cash)) {
          firebase.database().ref('players/' + this.uid + '/stocks/' +  this.name + '/').set(parseInt(this.quan) + parseInt(currentQuan));
 	 var costRef = firebase.database().ref('players/' + this.uid + '/cash/');
-	 costRef.set(Number(this.cash) - Number(this.cost));
-	 costRef.on('value',(snapshot) => {
-            this.newCash = snapshot.val();
-	 });
+	 this.newCash = Math.round((Number(this.cash) - Number(this.cost)) * 100) / 100; 
+	 costRef.set(this.newCash);
+	 
      
 	 this.state = 'confirm';
      }
@@ -64,8 +63,8 @@ export class BuyConfirmComponent implements OnInit, OnDestroy {
             this.value = +params['value'];
      });
      var user = firebase.auth().currentUser;
-     var uid = user.uid;
-     var costRef = firebase.database().ref('players/' + uid + '/cash/');
+     this.uid = user.uid;
+     var costRef = firebase.database().ref('players/' + this.uid + '/cash/');
      costRef.on('value',(snapshot) => {
         this.cash = snapshot.val();
      });
