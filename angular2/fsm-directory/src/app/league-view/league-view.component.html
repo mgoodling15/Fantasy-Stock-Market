@@ -1,9 +1,11 @@
 <league-form [hidden] = "isInLeague"></league-form>
 
 <div class="container" [hidden] = "isInLeague">
-  <h2>Join League</h2>
+  <div>
+  </div>
+  <h2 class = "join">Join League</h2>
+  <form>
   <div class="form-group">
-    <label for="leaguename">League Name</label>
     <input type="text" class="form-control" id="leaguename"
     required
     [(ngModel)]="model.leaguename" name="leaguename"
@@ -15,19 +17,19 @@
   </div>
   <button class="btn btn-success"
   (click) = 'joinLeague(model.leaguename)'>Join League</button>
+</form>
 </div>
 
-<h1 class="container">League Name: {{ leaguename }}</h1>
-
+<h2 class="container">League Name: {{ leaguename }}</h2>
 <h3 class="container">Date of Start: {{ startDate }}</h3>
 
 <div class="container">
-  <h2>Net Worth of Players in Your League:</h2>
+  <h3>Net worth of players in Your League:</h3>
     <ul id="player-listing">
       <li *ngFor="let player of players">
         <div class="single-player">
           <!-- Player Name -->
-          <h3>{{ player.username }}: 100000</h3>
+          <h3>{{ player.username }}: $100000</h3>
         </div>
       </li>
     </ul>
